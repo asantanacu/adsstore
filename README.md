@@ -48,14 +48,14 @@ ex. php adsstore database --file="file.sql"
 #seed  
 command to insert data in the database  
 ex php adsstore database --fake  
-ex php adsstore database --user="info@adsstore.com,John,Doe,1980-1-1,secret"
-ex php adsstore database --tags="red,blue,green"
-ex php adsstore database --image="flowers,http://images/flowers.jpg,500,600,red,country,flowers"
+ex php adsstore database --user="info@adsstore.com,John,Doe,1980-1-1,secret"  
+ex php adsstore database --tags="red,blue,green"  
+ex php adsstore database --image="flowers,http://images/flowers.jpg,500,600,red,country,flowers"  
 
 "--fake" => optional, insert one user in the database, insert 100 images with aleatories sizes and tags  
 "--user" => optional, insert a user in the database, fields of the user should be separated by comma [email,firstname,lastname,birthday,password]  
 "--tags" => optional, insert a list of tags in the database, tags should be separeted by comma  
-"--image" => optional, insert an image in the database, fields of the user should be separeted by comma [name,url,width,height,tag1,tag2,tag3...]
+"--image" => optional, insert an image in the database, fields of the user should be separeted by comma [name,url,width,height,tag1,tag2,tag3...]  
 
 
 
