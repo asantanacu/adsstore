@@ -1,0 +1,22 @@
+{
+    "name": "The Ads Store",
+    "description": "Demo Project",
+    "keywords": ["php", "framework", "advertising"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexander",
+            "email": "asantanacu@gmail.com",
+            "role": "Creator / Main Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.6",
+        "fzaninotto/faker": "^1.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}

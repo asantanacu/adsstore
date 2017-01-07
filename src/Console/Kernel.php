@@ -1,0 +1,31 @@
+<?php
+namespace App\Console;
+
+/**
+* Manage the console commands.
+**/
+class Kernel extends \App\Kernel
+{
+    /**
+    * Find and run the properly command.
+    * Fill out the parameters array.
+    *
+    * @param  array  $argv
+    * @return void
+    */
+    public function run(array $argv)
+    {
+        $command = 'App\\Console\\'.ucfirst($argv[1]).'Command';
+
+        $parameters = array();
+        foreach ($argv as $arg){
+            $key;
+            $value;
+            list($key,$value) = array_pad(explode('=', $arg,2), 2, null);
+            if($key)
+            	$parameters[$key]=$value;
+        }
+
+        call_user_func([$command,'run'],$this->app, $parameters);
+    }
+}
