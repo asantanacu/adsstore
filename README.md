@@ -6,7 +6,8 @@ PHP >= 5.6
 
 #install  
 Clone in a PHP server and point the host to public folder (../adsstore/public).  
-Run composer, only to use the autoload for namespaces and the external package "fzaninotto/faker".    
+Go to the main folder of the project "adsstore" and run composer, only to use the autoload for namespaces and the external package "fzaninotto/faker".  
+composer install
 
 #setup  
 Open config/conf.php and enter the database configuration  
