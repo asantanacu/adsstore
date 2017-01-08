@@ -45,7 +45,7 @@ $config['services'] = [
     'image_repository' => [\App\Repository\ImageRepository::class,
         ['database']
     ],
-    'tag_repository' => [\App\Repository\TagRepository::class,
+    'keyword_repository' => [\App\Repository\KeywordRepository::class,
         ['database']
     ]	
 ];

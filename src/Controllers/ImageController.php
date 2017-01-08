@@ -58,10 +58,10 @@ class ImageController
 
         //save image
         $image = $app['image_repository']->save($image);
-        //search the tags ids, creating the no existing ones
-        $tags = $app['tag_repository']->searchByTags($request->post('tags'));
-        //udpate tags ids in the new image
-        $app['image_repository']->updateTags($image->id, $tags);
+        //search the keywords ids, creating the no existing ones
+        $keywords = $app['keyword_repository']->searchByKeywords($request->post('keywords'));
+        //udpate keywords ids in the new image
+        $app['image_repository']->updateKeywords($image->id, $keywords);
 
         // message and redirect
         $app['session']->set('message', 'Image created successfully!');
@@ -80,8 +80,8 @@ class ImageController
     {
         // find the image
         $image = $app['image_repository']->find($args[0]);
-        // get tags for the image
-        $image->tags = $app['image_repository']->getTags($args[0]);
+        // get keywords for the image
+        $image->keywords = $app['image_repository']->getKeywords($args[0]);
         // show the view and pass the image to it
         $app['view']->view('images/show', ['image'=> $image]);    	
     }
@@ -97,8 +97,8 @@ class ImageController
     {
         // get all the images
         $image = $app['image_repository']->find($args[0]);
-        // get tags for the image
-        $image->tags = $app['image_repository']->getTags($args[0]);     
+        // get keywords for the image
+        $image->keywords = $app['image_repository']->getKeywords($args[0]);     
         // show the edit form and pass the image
         $app['view']->view('images/edit', ['image'=> $image]);     	
     }
@@ -128,10 +128,10 @@ class ImageController
 		$image->id = $args[0];
         //save image
         $image = $app['image_repository']->update($image);
-        //search the tags ids, creating the no existing ones
-        $tags = $app['tag_repository']->searchByTags($request->post('tags'));
-        //udpate tags ids in the new image
-        $app['image_repository']->updateTags($image->id, $tags);
+        //search the keywords ids, creating the no existing ones
+        $keywords = $app['keyword_repository']->searchByKeywords($request->post('keywords'));
+        //udpate keywords ids in the new image
+        $app['image_repository']->updateKeywords($image->id, $keywords);
 
         // message and redirect
         $app['session']->set('message', 'Image updated successfully!');      

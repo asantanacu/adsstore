@@ -22,9 +22,9 @@
                         <strong>Height:</strong> <?php echo $image->height; ?>
                     </p>  
                     <p>
-                        <strong>Tags:</strong> 
+                        <strong>Keywords:</strong> 
                         <?php 
-                            echo implode(", ", array_map(function($tag) { return $tag->tag; }, $image->tags));
+                            echo implode(", ", array_map(function($keyword) { return $keyword->keyword; }, $image->keywords));
                         ?>
                     </p>                       
                     <p>                        

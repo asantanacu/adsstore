@@ -22,7 +22,7 @@ class SearchCommand
         $match_all = array_key_exists('--match_all',$parameters) ? true : false;
 
         //search in image repository
-        $images = $app['image_repository']->search($parameters['--tags'], $width, $height, $amount, $match_all);
+        $images = $app['image_repository']->search($parameters['--keywords'], $width, $height, $amount, $match_all);
 
         //print results in the required format
         if(array_key_exists('--pretty',$parameters))

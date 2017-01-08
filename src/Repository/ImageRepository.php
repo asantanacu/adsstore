@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use PDO;
 use App\Models\Image;
-use App\Models\Tag;
+use App\Models\Keyword;
 
 class ImageRepository extends Repository
 {
@@ -86,58 +86,58 @@ class ImageRepository extends Repository
         $stmt->bindParam(':id', $id);
         return $stmt->execute();
     }
-    public function getTags($id)
+    public function getKeywords($id)
     {
         $stmt = $this->getConnection()->prepare('
-            SELECT "Tags", tags.tag
-            FROM tags 
-            INNER JOIN images_tags ON tags.id = images_tags.tag_id
-            WHERE images_tags.image_id = :id
+            SELECT "Keywords", keywords.keyword
+            FROM keywords 
+            INNER JOIN images_keywords ON keywords.id = images_keywords.keyword_id
+            WHERE images_keywords.image_id = :id
         ');
 
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         
-        $stmt->setFetchMode(PDO::FETCH_CLASS, Tag::class);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, Keyword::class);
         return $stmt->fetchAll();    	
     }
-    public function updateTags($id, $tags)
+    public function updateKeywords($id, $keywords)
     {
     	$stmt = $this->getConnection()->prepare('
-            DELETE FROM images_tags 
+            DELETE FROM images_keywords 
              WHERE image_id = :id
         ');
         $stmt->bindParam(':id', $id);
         $stmt->execute();
 
-        $values = implode(',',array_map(function($tag) use ($id){ return "($id,$tag)"; },$tags));
+        $values = implode(',',array_map(function($keyword) use ($id){ return "($id,$keyword)"; },$keywords));
         if($values){
 	    	$stmt = $this->getConnection()->prepare('
-	            INSERT INTO images_tags  (image_id, tag_id)
+	            INSERT INTO images_keywords  (image_id, keyword_id)
 	            VALUES '.$values);
 	        return $stmt->execute();     
 	    }
 	    else  
 	    	return true;
     }
-    public function search($tags, $width = 0, $height = 0, $count = 0, $match_all = true)
+    public function search($keywords, $width = 0, $height = 0, $count = 0, $match_all = true)
     {
-    	$tags = explode(",",$tags);
-    	$tags = array_map('trim',$tags);
-    	$tags = array_map('strtolower',$tags);
-    	$tags = array_unique($tags);
-    	$c_tags = count($tags);
-    	$tags = "'".implode("','",$tags)."'";
+    	$keywords = explode(",",$keywords);
+    	$keywords = array_map('trim',$keywords);
+    	$keywords = array_map('strtolower',$keywords);
+    	$keywords = array_unique($keywords);
+    	$c_keywords = count($keywords);
+    	$keywords = "'".implode("','",$keywords)."'";
     	$where = $width ? " AND images.width=:width " : "";
     	$where .= $height ? " AND images.height=:height " : "";
 
     	$query = 'SELECT images.* FROM images
-            INNER JOIN images_tags ON images.id = images_tags.image_id 
-            INNER JOIN tags ON tags.id = images_tags.tag_id
-            WHERE tags.tag in ('.$tags.') '. $where .' 
+            INNER JOIN images_keywords ON images.id = images_keywords.image_id 
+            INNER JOIN keywords ON keywords.id = images_keywords.keyword_id
+            WHERE keywords.keyword in ('.$keywords.') '. $where .' 
             GROUP BY images.id ';
         if($match_all)
-            $query .= 'HAVING count(images.id) = :c_tags ';
+            $query .= 'HAVING count(images.id) = :c_keywords ';
         $query .= 'ORDER BY count(images.id) DESC ';
         if($count){
             $query .= 'LIMIT :count';
@@ -145,7 +145,7 @@ class ImageRepository extends Repository
 		$stmt = $this->getConnection()->prepare($query);
 
         if($match_all)
-            $stmt->bindParam(':c_tags', $c_tags);
+            $stmt->bindParam(':c_keywords', $c_keywords);
         if($count)
             $stmt->bindValue(':count', (int)$count, PDO::PARAM_INT);
         if($width)

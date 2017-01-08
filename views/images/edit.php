@@ -60,11 +60,11 @@
 
                     <div class="form-group">
                         
-                        <label for="height" class="col-md-4 control-label">Tags</label>
+                        <label for="height" class="col-md-4 control-label">Keywords</label>
 
                         <div class="col-md-6">
-                        	<input type="text" name="tags" class="form-control"
-                        	value="<?php echo isset($image) ? implode(", ", array_map(function($tag) { return $tag->tag; }, $image->tags)) : '' ?>" >
+                        	<input type="text" name="keywords" class="form-control"
+                        	value="<?php echo isset($image) ? implode(", ", array_map(function($keyword) { return $keyword->keyword; }, $image->keywords)) : '' ?>" >
                         </div>
                     </div>   
 

@@ -16,8 +16,8 @@
                 <form action="/search" class="form-horizontal">
                     <div class="control-group">
                         <div class="controls form-inline">
-                            <label for="tags">Keys: </label>
-                            <input type="text" class="input-small" placeholder="comma-separated-value, i.e. 'blue, flowers, desert'" name="tags" id="tags" size="60" value="<?php echo $app['request']->get('tags'); ?>">
+                            <label for="keywords">Keys: </label>
+                            <input type="text" class="input-small" placeholder="comma-separated-value, i.e. 'blue, flowers, desert'" name="keywords" id="keywords" size="60" value="<?php echo $app['request']->get('keywords'); ?>">
                             <label for="amount">Amount: </label>
                             <input type="number" class="input-small" placeholder="Number of images" id="amount" name="amount" value="<?php echo $app['request']->get('amount'); ?>">
                             <br/><br/>

@@ -4,7 +4,7 @@ namespace App\Console;
 use App\Application;
 use App\Models\User;
 use App\Models\Image;
-use App\Models\Tag;
+use App\Models\Keyword;
 
 class SeedCommand
 {
@@ -22,8 +22,8 @@ class SeedCommand
         if(isset($parameters['--user']))
             SELF::seedUser($app, explode(',', $parameters['--user']));
 
-        if(isset($parameters['--tags']))
-            SELF::seedTags($app, explode(',', $parameters['--tags']));
+        if(isset($parameters['--keywords']))
+            SELF::seedKeywords($app, explode(',', $parameters['--keywords']));
 
         if(isset($parameters['--image']))
             SELF::seedImage($app, explode(',', $parameters['--image'],5));
@@ -49,13 +49,13 @@ class SeedCommand
         $app['user_repository']->save($user);
     }
 
-    protected static function seedTags(Application $app, array $tags)
+    protected static function seedKeywords(Application $app, array $keywords)
     {
-        //create tags
-        foreach($tags as $tag)
+        //create keywords
+        foreach($keywords as $keyword)
         {
-            $tag = new Tag(['tag'=>$tag]);
-            $app['tag_repository']->save($tag);
+            $keyword = new Keyword(['keyword'=>$keyword]);
+            $app['keyword_repository']->save($keyword);
         }
     }
 
@@ -72,10 +72,10 @@ class SeedCommand
         //save image
         $image = $app['image_repository']->save($image);
         if(isset($parameters[4])){
-            //search the tags ids, creating the no existing ones
-            $tags = $app['tag_repository']->searchByTags($parameters[4]);
-            //udpate tags ids in the new image
-            $app['image_repository']->updateTags($image->id, $tags);        
+            //search the keywords ids, creating the no existing ones
+            $keywords = $app['keyword_repository']->searchByKeywords($parameters[4]);
+            //udpate keywords ids in the new image
+            $app['image_repository']->updateKeywords($image->id, $keywords);        
         }
     }
 
@@ -121,11 +121,11 @@ class SeedCommand
 
             //save image
             $image = $app['image_repository']->save($image);
-            $tags = $faker->randomElement($colors).','.$faker->randomElement($words).','.$faker->randomElement($words).','.$faker->randomElement($states);
-            //search the tags ids, creating the no existing ones
-            $tags = $app['tag_repository']->searchByTags($tags);
-            //udpate tags ids in the new image
-            $app['image_repository']->updateTags($image->id, $tags);        
+            $keywords = $faker->randomElement($colors).','.$faker->randomElement($words).','.$faker->randomElement($words).','.$faker->randomElement($states);
+            //search the keywords ids, creating the no existing ones
+            $keywords = $app['keyword_repository']->searchByKeywords($keywords);
+            //udpate keywords ids in the new image
+            $app['image_repository']->updateKeywords($image->id, $keywords);        
         }
     }  
 

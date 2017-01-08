@@ -34,7 +34,7 @@ $router->get('/api/search', function(array $args, \App\Application  $app){
     $request = $app['request'];
     $match_all = $request->get('match_all') ? true : false;
     //get images
-    $images = $app['image_repository']->search($request->get('tags'), $request->get('width'), $request->get('height'), $request->get('amount'), $match_all);
+    $images = $app['image_repository']->search($request->get('keywords'), $request->get('width'), $request->get('height'), $request->get('amount'), $match_all);
     //return json
     echo json_encode([
         'count'=>count($images),
