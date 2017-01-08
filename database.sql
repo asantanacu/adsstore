@@ -38,9 +38,9 @@ DEFAULT CHARACTER SET = latin1;
 /*create table keywords*/
 CREATE TABLE keywords (
   id INT NOT NULL AUTO_INCREMENT,
-  keyword VARCHAR(30) NOT NULL UNIQUE,
+  name VARCHAR(30) NOT NULL UNIQUE,
   PRIMARY KEY (id),
-  INDEX (keyword)
+  INDEX (name)
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;

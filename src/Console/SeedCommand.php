@@ -54,7 +54,7 @@ class SeedCommand
         //create keywords
         foreach($keywords as $keyword)
         {
-            $keyword = new Keyword(['keyword'=>$keyword]);
+            $keyword = new Keyword(['name'=>$keyword]);
             $app['keyword_repository']->save($keyword);
         }
     }

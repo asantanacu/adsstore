@@ -89,7 +89,7 @@ class ImageRepository extends Repository
     public function getKeywords($id)
     {
         $stmt = $this->getConnection()->prepare('
-            SELECT "Keywords", keywords.keyword
+            SELECT "Keywords", keywords.name
             FROM keywords 
             INNER JOIN images_keywords ON keywords.id = images_keywords.keyword_id
             WHERE images_keywords.image_id = :id
@@ -134,7 +134,7 @@ class ImageRepository extends Repository
     	$query = 'SELECT images.* FROM images
             INNER JOIN images_keywords ON images.id = images_keywords.image_id 
             INNER JOIN keywords ON keywords.id = images_keywords.keyword_id
-            WHERE keywords.keyword in ('.$keywords.') '. $where .' 
+            WHERE keywords.name in ('.$keywords.') '. $where .' 
             GROUP BY images.id ';
         if($match_all)
             $query .= 'HAVING count(images.id) = :c_keywords ';

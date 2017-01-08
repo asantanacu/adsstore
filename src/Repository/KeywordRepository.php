@@ -25,9 +25,9 @@ class KeywordRepository extends Repository
         $stmt = $this->getConnection()->prepare('
             SELECT "Keyword", keywords.* 
              FROM keywords 
-             WHERE keyword = :keyword
+             WHERE name = :name
         ');
-        $stmt->bindParam(':keyword', $keyword);
+        $stmt->bindParam(':name', $keyword);
         $stmt->execute();
         
         $stmt->setFetchMode(PDO::FETCH_CLASS, Keyword::class);
@@ -53,11 +53,11 @@ class KeywordRepository extends Repository
         }
         $stmt = $this->getConnection()->prepare('
             INSERT INTO keywords 
-                (keyword) 
+                (name) 
             VALUES 
-                (:keyword)
+                (:name)
         ');
-        $stmt->bindParam(':keyword', $keyword->keyword);
+        $stmt->bindParam(':name', $keyword->name);
         $stmt->execute();
         $keyword->id = $this->getConnection()->lastInsertId();
         return $keyword;
@@ -72,10 +72,10 @@ class KeywordRepository extends Repository
         }
         $stmt = $this->getConnection()->prepare('
             UPDATE keywords
-            SET keyword= :keyword,
+            SET name= :name,
             WHERE id = :id
         ');
-        $stmt->bindParam(':keyword', $keyword->keyword);
+        $stmt->bindParam(':name', $keyword->name);
         $stmt->bindParam(':id', $keyword->id);
         $stmt->execute();
         return $keyword;
@@ -95,16 +95,16 @@ class KeywordRepository extends Repository
     	$keywords = array_map('trim',$keywords);
         $keywords = array_map('strtolower',$keywords);
         $result = array();
-        foreach($keywords as $keyword_name)
+        foreach($keywords as $name)
     	{
-            if(!$keyword_name)
+            if(!$name)
                 continue;
-            $keyword = $this->findByKeyword($keyword_name);
+            $keyword = $this->findByKeyword($name);
             if(!isset($keyword->id)){
-                $keyword = new Keyword(['keyword'=>$keyword_name]);
+                $keyword = new Keyword(['name'=>$name]);
                 $keyword = $this->save($keyword);
             }
-            $result[$keyword_name] = $keyword->id;
+            $result[$name] = $keyword->id;
         }
         return $result; 	
     }
