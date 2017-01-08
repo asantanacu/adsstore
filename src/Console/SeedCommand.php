@@ -114,7 +114,7 @@ class SeedCommand
             //create image
             $image = new Image([
                 'name'=>$faker->sentence(3),
-                'url'=>"http://lorempixel.com/$width/$height/",
+                'url'=>$faker->imageUrl($width,$height),
                 'width'=>$width,
                 'height'=>$height,
             ]);
