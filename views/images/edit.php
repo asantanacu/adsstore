@@ -35,7 +35,9 @@
 
                         <div class="col-md-6">
                         	<input type="text" name="url" class="form-control" required="required" value="<?php echo isset($image) ? $image->url : '' ?>" >
+                            <?php if(isset($image)) { ?>
                             <br/><img src="<?php echo $image->url; ?>" class="img-responsive" style="height:300px">
+                            <?php } ?>
                         </div>
 
                     </div>
@@ -64,7 +66,7 @@
 
                         <div class="col-md-6">
                         	<input type="text" name="keywords" class="form-control"
-                        	value="<?php echo isset($image) ? implode(", ", array_map(function($keyword) { return $keyword->keyword; }, $image->keywords)) : '' ?>" >
+                        	value="<?php echo isset($image) ? implode(", ", array_map(function($keyword) { return $keyword->name; }, $image->keywords)) : '' ?>" >
                         </div>
                     </div>   
 

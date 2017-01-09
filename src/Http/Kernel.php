@@ -9,17 +9,26 @@ class Kernel extends \App\Kernel
     * @return void
     */    
     public function run(){
-        //get the resource form route service
-        $resource = $this->app['route']->match($_SERVER, $_POST); 
 
-        if(is_array($resource)){
-            if(isset($resource['handler']))
-                call_user_func_array($resource['handler'], [$resource['args'], $this->app]);
+        try{
+            //get the resource form route service
+            $resource = $this->app['route']->match($_SERVER, $_POST); 
+
+            if(is_array($resource)){
+                if(isset($resource['handler']))
+                    call_user_func_array($resource['handler'], [$resource['args'], $this->app]);
+                else
+                    $this->controllerDispatcher($resource);
+            }
             else
-                $this->controllerDispatcher($resource);
+                throw new \Exception("route not match"); 
         }
-        else
-            throw new \Exception("route not match"); 
+        catch(\Exception $e){
+            if($this->app->environment('PRODUCTION'))
+                $this->app['view']->view('error',['message'=>$e->getMessage()]);
+            else
+                throw $e;
+        }
     }
 
     /**
@@ -38,11 +47,11 @@ class Kernel extends \App\Kernel
                 return;
         
         if(!class_exists($controller)){
-            throw new \Exception("controller $controller does not exist");
+            throw new \Exception("controller {$resource['controller']} does not exist");
         }
         $controller = new $controller; 
         if(!method_exists($controller, $method)){
-            throw new \Exception("method $method does not exist in $controller"); 
+            throw new \Exception("method $method does not exist in {$resource['controller']}"); 
         }
 
         $controller->$method($args, $this->app);

@@ -16,6 +16,10 @@ class SearchCommand
     public static function run(Application $app, array $parameters)
     {
         //extract parameters
+        if(!isset($parameters['--keywords'])){
+            echo "Missing parameter --keywords".PHP_EOL;
+            return;
+        }
         $amount = isset($parameters['--amount']) ? $parameters['--amount'] : 0;
         $width = isset($parameters['--width']) ? $parameters['--width'] : 0;
         $height = isset($parameters['--height']) ? $parameters['--height'] : 0;

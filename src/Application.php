@@ -19,4 +19,9 @@ Class Application extends Container{
         $this['view']->view($block, $variables);
     }
 
+    public function environment($environment)
+    {
+        return strcasecmp($environment, $this['config']['env']) == 0;
+    }
+
 }

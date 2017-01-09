@@ -1,5 +1,8 @@
 <?php
 
+// environment
+$config['env'] = 'PRODUCTION';
+
 // routes file
 $config['route'] = [
     'path' => __DIR__ . '/routes.php'

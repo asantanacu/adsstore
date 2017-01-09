@@ -24,7 +24,7 @@
                     <p>
                         <strong>Keywords:</strong> 
                         <?php 
-                            echo implode(", ", array_map(function($keyword) { return $keyword->keyword; }, $image->keywords));
+                            echo implode(", ", array_map(function($keyword) { return $keyword->name; }, $image->keywords));
                         ?>
                     </p>                       
                     <p>                        

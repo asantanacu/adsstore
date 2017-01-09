@@ -15,17 +15,28 @@ class Kernel extends \App\Kernel
     */
     public function run(array $argv)
     {
-        $command = 'App\\Console\\'.ucfirst($argv[1]).'Command';
+        try{
+            $command = 'App\\Console\\'.ucfirst($argv[1]).'Command';
 
-        $parameters = array();
-        foreach ($argv as $arg){
-            $key;
-            $value;
-            list($key,$value) = array_pad(explode('=', $arg,2), 2, null);
-            if($key)
-            	$parameters[$key]=$value;
+            $parameters = array();
+            foreach ($argv as $arg){
+                $key;
+                $value;
+                list($key,$value) = array_pad(explode('=', $arg,2), 2, null);
+                if($key)
+                    $parameters[$key]=$value;
+            }
+
+            call_user_func([$command,'run'],$this->app, $parameters);
         }
-
-        call_user_func([$command,'run'],$this->app, $parameters);
+        catch(\Exception $e){
+            if($this->app->environment('PRODUCTION'))
+            {
+                echo "Unexpected error.".PHP_EOL;
+                echo $e->getMessage().PHP_EOL;
+            }
+            else
+                throw $e;
+        }
     }
 }
