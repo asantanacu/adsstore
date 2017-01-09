@@ -32,7 +32,7 @@ class DatabaseCommand
         $sql = file_get_contents($file);
         $sql = "USE {$app['config']['database']['database']}; ".$sql;
         $stmt = $app['database']->getConnection()->prepare($sql, array( \PDO::ATTR_EMULATE_PREPARES => true ) );
-        $stmt->execute();        
+        $stmt->execute();   
 
     }
 
