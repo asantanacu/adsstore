@@ -27,11 +27,7 @@ class Kernel extends \App\Kernel
                     $parameters[$key]=$value;
             }
 
-            echo "Running command '$command'...".PHP_EOL;
-
             call_user_func([$command,'run'],$this->app, $parameters);
-
-            echo "Finished successfully.".PHP_EOL;
         }
         catch(\Exception $e){
             if($this->app->environment('PRODUCTION'))

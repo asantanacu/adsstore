@@ -17,7 +17,7 @@ class SeedCommand
     */
     public static function run(Application $app, array $parameters)
     {
-        echo PHP_EOL;
+        echo "Running command 'Seed'...".PHP_EOL;
         
         if(isset($parameters['--user']))
             SELF::seedUser($app, explode(',', $parameters['--user']));
@@ -32,6 +32,7 @@ class SeedCommand
             SELF::seedFake($app, $parameters);        
         }
 
+        echo "Finished successfully.".PHP_EOL;
     }
 
     protected static function seedUser(Application $app, array $parameters)

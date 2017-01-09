@@ -29,8 +29,10 @@ class SearchCommand
         $images = $app['image_repository']->search($parameters['--keywords'], $width, $height, $amount, $match_all);
 
         //print results in the required format
-        if(array_key_exists('--pretty',$parameters))
+        if(array_key_exists('--pretty',$parameters)){
             SELF::print_pretty($images);
+            echo "Finished successfully.".PHP_EOL;
+        }
         else
             echo json_encode([
                 'count'=>count($images),

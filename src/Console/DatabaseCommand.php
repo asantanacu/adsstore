@@ -14,7 +14,7 @@ class DatabaseCommand
     */
     public static function run(Application $app, array $parameters)
     {
-        echo PHP_EOL;
+        echo "Running command 'database'...".PHP_EOL;
         //extract parameters
         if(!isset($parameters['--file'])){
             echo "Missing parameter --file".PHP_EOL;
@@ -34,6 +34,7 @@ class DatabaseCommand
         $stmt = $app['database']->getConnection()->prepare($sql, array( \PDO::ATTR_EMULATE_PREPARES => true ) );
         $stmt->execute();   
 
+        echo "Finished successfully.".PHP_EOL;
     }
 
 }
