@@ -1,7 +1,3 @@
-/*create database schema*/
-/*CREATE SCHEMA IF NOT EXISTS ads_store DEFAULT CHARACTER SET latin1;
-
-USE ads_store;*/
 
 /*drop tables*/
 DROP TABLE IF EXISTS users;
