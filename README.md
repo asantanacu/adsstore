@@ -63,10 +63,10 @@ ex. `php adsstore database --file="file.sql"`
 
 command to insert data in the database
 
-ex `php adsstore database --fake`  
-ex `php adsstore database --user="info@adsstore.com,John,Doe,1980-1-1,secret"`  
-ex `php adsstore database --keywords="red,blue,green"`  
-ex `php adsstore database --image="flowers,http://images/flowers.jpg,500,600,red,country,flowers"`  
+ex `php adsstore seed --fake`  
+ex `php adsstore seed --user="info@adsstore.com,John,Doe,1980-1-1,secret"`  
+ex `php adsstore seed --keywords="red,blue,green"`  
+ex `php adsstore seed --image="flowers,http://images/flowers.jpg,500,600,red,country,flowers"`  
 
 "--fake" => optional, insert one user in the database, insert 100 images with aleatories sizes and keywords  
 "--user" => optional, insert a user in the database, fields of the user should be separated by comma [email,firstname,lastname,birthday,password]  
